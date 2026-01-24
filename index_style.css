@@ -1,0 +1,128 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.container {
+    text-align: center;
+}
+
+.title {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 36px;
+    color: #5a4a42;
+    margin-bottom: 50px;
+}
+
+.envelope {
+    position: relative;
+    width: 200px;
+    height: 140px;
+    margin: 0 auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.envelope:hover {
+    transform: scale(1.05);
+}
+
+.envelope-body {
+    position: absolute;
+    bottom: 0;
+    width: 200px;
+    height: 120px;
+    background: linear-gradient(145deg, #fff5f5, #ffe4e4);
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-top: 80px solid #ffcccb;
+    transform-origin: top;
+    transition: transform 0.5s ease;
+    z-index: 2;
+}
+
+.envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+}
+
+.heart {
+    font-size: 40px;
+    color: #ff6b6b;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.15);
+    }
+}
+
+.hint {
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 18px;
+    color: #888;
+    margin-top: 30px;
+    animation: fade 2s ease-in-out infinite;
+}
+
+@keyframes fade {
+    0%, 100% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .title {
+        font-size: 28px;
+        margin-bottom: 40px;
+    }
+
+    .envelope {
+        width: 160px;
+        height: 112px;
+    }
+
+    .envelope-body {
+        width: 160px;
+        height: 96px;
+    }
+
+    .envelope-flap {
+        border-left: 80px solid transparent;
+        border-right: 80px solid transparent;
+        border-top: 64px solid #ffcccb;
+    }
+
+    .heart {
+        font-size: 32px;
+    }
+}

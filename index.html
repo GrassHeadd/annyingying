@@ -1,35 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
     <head>
-        <link rel="stylesheet" href="./styles.css">
-        
-    </head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="./index_style.css">
+    </head>
     <body>
         <div class="container">
-            <div >
-                <h1 class = "header_text">Do you wanna go out with me?</h1>
-                <h1 class = "header_text">Are you free tommorow?</h1>
+            <h1 class="title">给你的一封信</h1>
+            <div class="envelope" onclick="openLetter()">
+                <div class="envelope-flap"></div>
+                <div class="envelope-body">
+                    <div class="heart">&#10084;</div>
+                </div>
             </div>
-            <div class="gif_container">
-                <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2d245amdveDhyYmx6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute animated illustration">
-            </div>
-            <div class = "buttons">
-                <button class="btn" id = "yesButton" onclick="nextPage()">Yes</button>
-                <button class="btn" id="noButton" onmouseover="moveButton()" onclick="moveButton()">No</button>
-                <script>
-                    function nextPage() {
-                        window.location.href = "yes.html";
-                    }
-                    
-                    function moveButton() {
-                        var x = Math.random() * (window.innerWidth - document.getElementById('noButton').offsetWidth) - 85;
-                        var y = Math.random() * (window.innerHeight - document.getElementById('noButton').offsetHeight) - 48;
-                        document.getElementById('noButton').style.left = `${x}px`;
-                        document.getElementById('noButton').style.top = `${y}px`;
-                    }
-                </script> 
-            </div>
+            <p class="hint">点击信封</p>
         </div>
-       
-    </body> 
+        <script>
+            function openLetter() {
+                document.querySelector('.envelope').classList.add('opened');
+                setTimeout(() => {
+                    window.location.href = "letter.html";
+                }, 800);
+            }
+        </script>
+    </body>
 </html>
