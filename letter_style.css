@@ -140,21 +140,56 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
+    body {
+        padding: 15px;
+        align-items: flex-start;
+        padding-top: 30px;
+    }
+
+    .container {
+        max-width: 100%;
+    }
+
     .letter {
-        padding: 35px 25px;
+        padding: 25px 20px;
     }
 
     .letter p {
-        font-size: 18px;
-        line-height: 1.9;
-        margin-bottom: 20px;
+        font-size: 16px;
+        line-height: 1.8;
+        margin-bottom: 18px;
     }
 
     .highlight {
-        font-size: 26px !important;
+        font-size: 24px !important;
+        margin-top: 20px !important;
     }
 
     .ending {
-        font-size: 17px !important;
+        font-size: 16px !important;
+    }
+
+    .hearts {
+        margin-top: 20px;
+        gap: 15px;
+    }
+
+    .heart {
+        font-size: 20px;
+    }
+
+    .question {
+        font-size: 22px;
+        margin-top: 25px;
+        margin-bottom: 20px;
+    }
+
+    .buttons {
+        gap: 20px;
+    }
+
+    .btn {
+        padding: 12px 30px;
+        font-size: 18px;
     }
 }

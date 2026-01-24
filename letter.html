@@ -1,19 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh">
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./letter_style.css">
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="./letter_style.css" />
     </head>
     <body>
         <div class="container">
             <div class="letter">
-                <p>我希望有个如你一般的人，如山间清爽的风，如古城温暖的光。从清晨到傍晚，由山野到书房。</p>
-                <p>和你在一起的时候，时间好像变得很轻很慢。很舒服，很自在，很想一直这样下去。</p>
-                <p>认识你的时间很短，但我很认真。我不喜欢做承诺，因为未来太远，谁也看不清。但有些事情不需要想太多——我的心跳、我的直觉、我靠近你时的感觉，都在告诉我同一件事。</p>
+                <p>
+                    我希望有个如你一般的人，如山间清爽的风，如古城温暖的光。从清晨到傍晚，由山野到书房。
+                </p>
+                <p>
+                    和你在一起的时候，时间好像变得很轻，很快，很舒服，很自在，很想一直这样下去。
+                </p>
+                <p>
+                    认识你的时间很短，但我很认真。我不喜欢做承诺，因为未来太远，谁也看不清。但有些事情不需要想太多——我的心跳、我的直觉、我靠近你时的感觉，都在告诉我同一件事。
+                </p>
                 <p class="highlight">我喜欢你。</p>
                 <p class="ending">只要最后是你，就好。</p>
             </div>
@@ -25,13 +34,26 @@
             <p class="question">做我女朋友好不好？</p>
             <div class="buttons">
                 <button class="btn yes-btn" onclick="nextPage()">好</button>
-                <button class="btn no-btn" id="noButton" onmouseover="moveButton()" onclick="handleNo()">不要</button>
+                <button
+                    class="btn no-btn"
+                    id="noButton"
+                    onmouseover="moveButton()"
+                    onclick="handleNo()"
+                >
+                    不要
+                </button>
             </div>
         </div>
         <script>
             let moveCount = 0;
-            const noResponses = ["不要", "真的不要", "别点我！", "求你了", "拜拜~"];
-            const noButton = document.getElementById('noButton');
+            const noResponses = [
+                "不要",
+                "真的不要",
+                "别点我！",
+                "求你了",
+                "拜拜~",
+            ];
+            const noButton = document.getElementById("noButton");
 
             function nextPage() {
                 window.location.href = "yes.html";
@@ -41,8 +63,8 @@
                 moveCount++;
 
                 if (moveCount >= 5) {
-                    noButton.style.transition = 'opacity 0.3s ease';
-                    noButton.style.opacity = '0';
+                    noButton.style.transition = "opacity 0.3s ease";
+                    noButton.style.opacity = "0";
                     setTimeout(() => {
                         noButton.remove();
                     }, 300);
@@ -55,7 +77,7 @@
                 const maxY = window.innerHeight - noButton.offsetHeight - 20;
                 const x = Math.random() * maxX;
                 const y = Math.random() * maxY;
-                noButton.style.position = 'fixed';
+                noButton.style.position = "fixed";
                 noButton.style.left = `${x}px`;
                 noButton.style.top = `${y}px`;
             }

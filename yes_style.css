@@ -3,21 +3,45 @@ body {
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background-color: rgb(189, 225, 122);
+    background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+
+.container {
+    text-align: center;
 }
 
 .header_text {
-    font-family: 'Nunito';
-    font-size: 50px;
+    font-family: 'ZCOOL XiaoWei', serif;
+    font-size: 48px;
     font-weight: bold;
-    color: white;
+    color: #e74c3c;
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
 }
 
 .gif_container {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.gif_container img {
+    max-width: 400px;
+    width: 85%;
+    background: white;
+    padding: 30px;
+    border-radius: 50%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+@media only screen and (max-width: 600px) {
+    .header_text {
+        font-size: 36px;
+        padding: 0 20px;
+    }
+
+    .gif_container img {
+        max-width: 220px;
+    }
 }

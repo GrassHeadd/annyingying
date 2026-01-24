@@ -102,8 +102,9 @@ body {
 
 @media only screen and (max-width: 600px) {
     .title {
-        font-size: 28px;
+        font-size: 26px;
         margin-bottom: 40px;
+        padding: 0 20px;
     }
 
     .envelope {
@@ -117,6 +118,7 @@ body {
     }
 
     .envelope-flap {
+        top: 16px;
         border-left: 80px solid transparent;
         border-right: 80px solid transparent;
         border-top: 64px solid #ffcccb;
@@ -124,5 +126,9 @@ body {
 
     .heart {
         font-size: 32px;
+    }
+
+    .hint {
+        font-size: 16px;
     }
 }
