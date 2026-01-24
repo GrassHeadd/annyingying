@@ -7,16 +7,51 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="./yes_style.css">
-    </head> 
+    </head>
     <body>
+        <div class="confetti-container" id="confetti"></div>
+        <div class="hearts-container" id="hearts"></div>
         <div class="container">
-            <div >
-                <h1 class = "header_text">太好啦！！</h1>
-            </div>
+            <h1 class="header_text">太好啦！！</h1>
+            <p class="subtext">我会好好珍惜你的 ❤️</p>
             <div class="gif_container">
                 <img src="./cat_flowers.jpeg" alt="Cute cat with flowers">
             </div>
         </div>
-       
-    </body> 
+        <script>
+            // Confetti
+            function createConfetti() {
+                const confettiContainer = document.getElementById('confetti');
+                const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#ff8cc8', '#a66cff'];
+
+                for (let i = 0; i < 100; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.animationDelay = Math.random() * 3 + 's';
+                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    confettiContainer.appendChild(confetti);
+                }
+            }
+
+            // Floating hearts
+            function createHearts() {
+                const heartsContainer = document.getElementById('hearts');
+
+                for (let i = 0; i < 20; i++) {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-heart';
+                    heart.innerHTML = '❤️';
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDelay = Math.random() * 5 + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heartsContainer.appendChild(heart);
+                }
+            }
+
+            createConfetti();
+            createHearts();
+        </script>
+    </body>
 </html>
