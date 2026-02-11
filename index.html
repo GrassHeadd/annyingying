@@ -1,31 +1,476 @@
 <!DOCTYPE html>
 <html lang="zh">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="./index_style.css">
-    </head>
-    <body>
-        <div class="container">
-            <h1 class="title">给你的一封信</h1>
-            <div class="envelope" onclick="openLetter()">
-                <div class="envelope-flap"></div>
-                <div class="envelope-body">
-                    <div class="heart">&#10084;</div>
-                </div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>给 Ann</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Press+Start+2P&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./site.css">
+    <link rel="stylesheet" href="./valentine_style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <a href="#" class="nav-link active" data-tab="confession">Confession</a>
+        <span class="nav-divider">|</span>
+        <a href="#" class="nav-link" data-tab="valentine">Valentine</a>
+    </nav>
+
+    <!-- Tab 1: Confession -->
+    <main id="tab-confession" class="tab-content active">
+
+        <!-- Intro -->
+        <section class="section section-intro">
+            <p class="intro-text fade-in">从那个网站到现在，好像很多事情都变了。</p>
+        </section>
+
+        <!-- The Moments -->
+        <section class="section section-moments">
+            <h2 class="section-title fade-in">那些时刻</h2>
+            <div class="moments-list">
+                <p class="moment fade-in">第一次见面，你笑着说你撞坏过停车杆</p>
+                <p class="moment fade-in">KTV唱到嗓子哑</p>
+                <p class="moment fade-in">你16小时shift还在跟我发消息</p>
+                <p class="moment fade-in">你把我送的东西挂在包上</p>
+                <p class="moment fade-in">你说"爱你"的那晚</p>
             </div>
-            <p class="hint">点击信封</p>
+        </section>
+
+        <!-- About You -->
+        <section class="section section-about">
+            <h2 class="section-title fade-in">关于你</h2>
+            <div class="about-list">
+                <p class="about-item fade-in">你很直接，不喜欢就会说</p>
+                <p class="about-item fade-in">你很努力，再累也不抱怨</p>
+                <p class="about-item fade-in">你让我觉得可以做自己</p>
+                <p class="about-item fade-in">你叫我宝宝的时候</p>
+            </div>
+        </section>
+
+        <!-- What's Next -->
+        <section class="section section-next">
+            <h2 class="section-title fade-in">接下来</h2>
+            <div class="next-list">
+                <p class="next-item fade-in">Cancún 🌴</p>
+                <p class="next-item fade-in">更多一起吃的东西</p>
+                <p class="next-item fade-in">更多一起走的路</p>
+                <p class="next-item fade-in">不做承诺，但会一直认真</p>
+            </div>
+        </section>
+
+        <!-- Original Confession -->
+        <section class="section section-origin">
+            <h2 class="section-title fade-in">最初</h2>
+            <div class="origin-text">
+                <p class="fade-in">我希望有个如你一般的人，如山间清爽的风，如古城温暖的光。从清晨到傍晚，由山野到书房。</p>
+                <p class="fade-in">和你在一起的时候，时间好像变得很轻很慢。很舒服，很自在，很想一直这样下去。</p>
+                <p class="fade-in">认识你的时间很短，但我很认真。我不喜欢做承诺，因为未来太远，谁也看不清。但有些事情不需要想太多——我的心跳、我的直觉、我靠近你时的感觉，都在告诉我同一件事。</p>
+                <p class="fade-in highlight">我喜欢你。</p>
+                <p class="fade-in">只要最后是你，就好。</p>
+            </div>
+        </section>
+
+        <!-- Closing -->
+        <section class="section section-closing">
+            <p class="closing-line fade-in">谢谢你让我走进来。</p>
+            <p class="closing-greeting fade-in">情人节快乐，宝宝。</p>
+            <p class="closing-love fade-in">爱你 ❤️</p>
+        </section>
+
+    </main>
+
+    <!-- Tab 2: Valentine Game -->
+    <main id="tab-valentine" class="tab-content">
+        <div id="game" class="game">
+            <div class="hearts-bg" id="hearts-bg"></div>
+            <div class="scene-container" id="scene-container"></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
         </div>
-        <script>
-            function openLetter() {
-                document.querySelector('.envelope').classList.add('opened');
-                setTimeout(() => {
-                    window.location.href = "letter.html";
-                }, 800);
+    </main>
+
+    <script>
+        // ─── Tab Switching ───
+
+        const nav = document.getElementById('nav');
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const tabId = link.dataset.tab;
+
+                // Update nav
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+
+                // Switch tab content
+                document.querySelectorAll('.tab-content').forEach(tab => {
+                    tab.classList.remove('active');
+                    tab.classList.remove('entering');
+                });
+
+                const target = document.getElementById('tab-' + tabId);
+                target.classList.add('active');
+
+                // Dark nav for valentine tab
+                if (tabId === 'valentine') {
+                    nav.classList.add('dark');
+                    document.body.style.overflow = 'hidden';
+                } else {
+                    nav.classList.remove('dark');
+                    document.body.style.overflow = '';
+                    // Reset and re-trigger fade-in animations
+                    requestAnimationFrame(() => {
+                        target.classList.add('entering');
+                        resetFadeIns(target);
+                    });
+                }
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // ─── Fade-in Observer ───
+
+        function setupObserver() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.15,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            document.querySelectorAll('.fade-in').forEach(el => {
+                observer.observe(el);
+            });
+
+            return observer;
+        }
+
+        function resetFadeIns(container) {
+            container.querySelectorAll('.fade-in').forEach(el => {
+                el.classList.remove('visible');
+            });
+            setTimeout(() => {
+                container.querySelectorAll('.fade-in').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight && rect.bottom > 0) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 50);
+        }
+
+        setupObserver();
+
+        // ─── Valentine Game ───
+
+        const scenes = [
+            {
+                type: 'title',
+                bg: '#13101f'
+            },
+            {
+                type: 'day',
+                day: '1',
+                date: '2月14日',
+                subtitle: "Valentine's Day",
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '~ 出发 ~',
+                text: '来吧宝宝\n冒险要开始了~',
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '📍 Court Square Hotel',
+                text: 'Long Island City\n先把东西放下~',
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '然后我们...\n先休息一下？👀',
+                bg: '#18122e'
+            },
+            {
+                type: 'scene',
+                label: '📍 NARO · 5:30 PM',
+                text: '情人节晚餐~\n610 5th Ave',
+                bg: '#1c1432'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '吃饱了\n回酒店休息～ 💤',
+                bg: '#0f0d1a'
+            },
+            {
+                type: 'day',
+                day: '2',
+                date: '2月15日',
+                subtitle: 'The Adventure Continues',
+                bg: '#161230'
+            },
+            {
+                type: 'scene',
+                label: '☀️ 早上好',
+                text: '新的一天！\n退房，去Downtown~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '🍽️ 午饭',
+                text: '先去吃点东西\n补充体力~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '📍 SIX · 2:00 PM',
+                text: 'Broadway 音乐剧！\nMezz · Row J',
+                bg: '#1a1235'
+            },
+            {
+                type: 'scene',
+                label: '📍 AC Hotel by Marriott',
+                text: 'New York Downtown\n新酒店 check in~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '🍽️ 晚餐',
+                text: '待定...\n你想吃什么？',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '然后继续...\nNetflix？😏💤',
+                bg: '#0f0d1a'
+            },
+            {
+                type: 'day',
+                day: '3',
+                date: '2月16日',
+                subtitle: 'Until Next Time',
+                bg: '#161222'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '退房～\n冒险结束了...',
+                bg: '#161222'
+            },
+            {
+                type: 'ending',
+                text: '但跟你的故事\n才刚刚开始',
+                bg: '#161222'
             }
-        </script>
-    </body>
+        ];
+
+        let currentScene = 0;
+        let gameState = 'READY';
+        let typeTimer = null;
+        let fullText = '';
+
+        const gameEl = document.getElementById('game');
+        const sceneContainer = document.getElementById('scene-container');
+        const progressFill = document.getElementById('progress-fill');
+
+        // Floating hearts
+        function createHearts() {
+            const heartsBg = document.getElementById('hearts-bg');
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'pixel-heart';
+                heart.textContent = '♥';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                heart.style.animationDelay = (Math.random() * 12) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                heart.style.setProperty('--max-opacity', (Math.random() * 0.15 + 0.06).toFixed(2));
+                heartsBg.appendChild(heart);
+            }
+        }
+
+        // Render functions
+        function renderTitle(el) {
+            el.innerHTML = `
+                <div class="title-chars">
+                    <img src="./jj_pixel.png" alt="JJ" class="bob-1">
+                    <span class="title-heart">❤️</span>
+                    <img src="./ann_pixel.png" alt="Ann" class="bob-2">
+                </div>
+                <div class="title-main">VALENTINE'S<br>QUEST</div>
+                <div class="title-year">2026</div>
+                <div class="title-start">TAP TO START</div>
+            `;
+            gameState = 'READY';
+        }
+
+        function renderDay(el, scene) {
+            el.innerHTML = `
+                <div class="day-screen">
+                    <div class="day-label">DAY ${scene.day}</div>
+                    <div class="day-date">${scene.date}</div>
+                    <div class="day-subtitle">${scene.subtitle}</div>
+                </div>
+            `;
+            gameState = 'READY';
+        }
+
+        function renderDialogue(el, scene) {
+            el.innerHTML = `
+                <div class="scene-content">
+                    <div class="scene-label">${scene.label || ''}</div>
+                    <div class="characters">
+                        <img src="./jj_pixel.png" alt="JJ" class="char bob-1">
+                        <img src="./ann_pixel.png" alt="Ann" class="char bob-2">
+                    </div>
+                    <div class="dialogue-box">
+                        <div class="dialogue-text" id="dtext"></div>
+                        <div class="dialogue-arrow" id="darrow">▼</div>
+                    </div>
+                </div>
+            `;
+            typeTextAnim(scene.text);
+        }
+
+        function renderEnding(el, scene) {
+            el.innerHTML = `
+                <div class="ending-screen">
+                    <div class="characters ending-chars">
+                        <img src="./jj_pixel.png" alt="JJ" class="char bob-1">
+                        <img src="./ann_pixel.png" alt="Ann" class="char bob-2">
+                    </div>
+                    <div class="ending-text">${scene.text.replace(/\n/g, '<br>')}</div>
+                    <div class="ending-hearts">❤️ ❤️ ❤️</div>
+                </div>
+            `;
+            gameState = 'DONE';
+        }
+
+        // Typing effect
+        function typeTextAnim(text) {
+            gameState = 'TYPING';
+            fullText = text;
+            const el = document.getElementById('dtext');
+            const arrow = document.getElementById('darrow');
+            if (!el) return;
+
+            el.innerHTML = '';
+            if (arrow) arrow.classList.remove('show');
+
+            let i = 0;
+            const chars = text.split('');
+
+            typeTimer = setInterval(() => {
+                if (i < chars.length) {
+                    const ch = chars[i];
+                    if (ch === '\n') {
+                        el.innerHTML += '<br>';
+                    } else {
+                        el.innerHTML += ch;
+                    }
+                    i++;
+                } else {
+                    clearInterval(typeTimer);
+                    typeTimer = null;
+                    gameState = 'READY';
+                    if (arrow) arrow.classList.add('show');
+                }
+            }, 50);
+        }
+
+        function showFullText() {
+            if (typeTimer) {
+                clearInterval(typeTimer);
+                typeTimer = null;
+            }
+            const el = document.getElementById('dtext');
+            const arrow = document.getElementById('darrow');
+            if (el) el.innerHTML = fullText.replace(/\n/g, '<br>');
+            if (arrow) arrow.classList.add('show');
+            gameState = 'READY';
+        }
+
+        // Scene management
+        function renderScene(index) {
+            const scene = scenes[index];
+
+            sceneContainer.classList.add('fade-out');
+
+            setTimeout(() => {
+                gameEl.style.background = scene.bg;
+
+                switch (scene.type) {
+                    case 'title':
+                        renderTitle(sceneContainer);
+                        break;
+                    case 'day':
+                        renderDay(sceneContainer, scene);
+                        break;
+                    case 'scene':
+                        renderDialogue(sceneContainer, scene);
+                        break;
+                    case 'ending':
+                        renderEnding(sceneContainer, scene);
+                        break;
+                }
+
+                sceneContainer.classList.remove('fade-out');
+                updateProgress(index);
+            }, 350);
+        }
+
+        function updateProgress(index) {
+            const pct = (index / (scenes.length - 1)) * 100;
+            progressFill.style.width = pct + '%';
+        }
+
+        function advance() {
+            // Only work when valentine tab is active
+            if (!document.getElementById('tab-valentine').classList.contains('active')) return;
+
+            if (gameState === 'TYPING') {
+                showFullText();
+                return;
+            }
+
+            if (gameState === 'DONE') return;
+
+            if (gameState === 'READY') {
+                currentScene++;
+                if (currentScene >= scenes.length) {
+                    gameState = 'DONE';
+                    return;
+                }
+                renderScene(currentScene);
+            }
+        }
+
+        // Game input
+        gameEl.addEventListener('click', advance);
+        gameEl.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            advance();
+        });
+
+        // Init game
+        createHearts();
+        renderScene(0);
+    </script>
+
+</body>
 </html>

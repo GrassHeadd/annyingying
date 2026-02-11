@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Valentine's Quest 2026</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./valentine_style.css">
+</head>
+<body>
+    <div id="game" class="game">
+        <div class="hearts-bg" id="hearts-bg"></div>
+        <div class="scene-container" id="scene-container"></div>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+        </div>
+    </div>
+
+    <script>
+        const scenes = [
+            {
+                type: 'title',
+                bg: '#13101f'
+            },
+            {
+                type: 'day',
+                day: '1',
+                date: '2月14日',
+                subtitle: "Valentine's Day",
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '~ 出发 ~',
+                text: '来吧宝宝\n冒险要开始了~',
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '📍 Court Square Hotel',
+                text: 'Long Island City\n先把东西放下~',
+                bg: '#1a1430'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '然后我们...\n先休息一下？👀',
+                bg: '#18122e'
+            },
+            {
+                type: 'scene',
+                label: '📍 NARO · 5:30 PM',
+                text: '情人节晚餐~\n610 5th Ave',
+                bg: '#1c1432'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '吃饱了\n回酒店休息～ 💤',
+                bg: '#0f0d1a'
+            },
+            {
+                type: 'day',
+                day: '2',
+                date: '2月15日',
+                subtitle: 'The Adventure Continues',
+                bg: '#161230'
+            },
+            {
+                type: 'scene',
+                label: '☀️ 早上好',
+                text: '新的一天！\n退房，去Downtown~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '🍽️ 午饭',
+                text: '先去吃点东西\n补充体力~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '📍 SIX · 2:00 PM',
+                text: 'Broadway 音乐剧！\nMezz · Row J',
+                bg: '#1a1235'
+            },
+            {
+                type: 'scene',
+                label: '📍 AC Hotel by Marriott',
+                text: 'New York Downtown\n新酒店 check in~',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '🍽️ 晚餐',
+                text: '待定...\n你想吃什么？',
+                bg: '#181430'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '然后继续...\nNetflix？😏💤',
+                bg: '#0f0d1a'
+            },
+            {
+                type: 'day',
+                day: '3',
+                date: '2月16日',
+                subtitle: 'Until Next Time',
+                bg: '#161222'
+            },
+            {
+                type: 'scene',
+                label: '',
+                text: '退房～\n冒险结束了...',
+                bg: '#161222'
+            },
+            {
+                type: 'ending',
+                text: '但跟你的故事\n才刚刚开始',
+                bg: '#161222'
+            }
+        ];
+
+        let currentScene = 0;
+        let state = 'READY';
+        let typeTimer = null;
+        let fullText = '';
+
+        const game = document.getElementById('game');
+        const container = document.getElementById('scene-container');
+        const progressFill = document.getElementById('progress-fill');
+
+        // ─── Floating hearts ───
+
+        function createHearts() {
+            const heartsBg = document.getElementById('hearts-bg');
+            for (let i = 0; i < 18; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'pixel-heart';
+                heart.textContent = '♥';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 8) + 's';
+                heart.style.animationDelay = (Math.random() * 12) + 's';
+                heart.style.fontSize = (Math.random() * 10 + 8) + 'px';
+                heart.style.setProperty('--max-opacity', (Math.random() * 0.15 + 0.06).toFixed(2));
+                heartsBg.appendChild(heart);
+            }
+        }
+
+        // ─── Render functions ───
+
+        function renderTitle(el) {
+            el.innerHTML = `
+                <div class="title-chars">
+                    <img src="./jj_pixel.png" alt="JJ" class="bob-1">
+                    <span class="title-heart">❤️</span>
+                    <img src="./ann_pixel.png" alt="Ann" class="bob-2">
+                </div>
+                <div class="title-main">VALENTINE'S<br>QUEST</div>
+                <div class="title-year">2026</div>
+                <div class="title-start">TAP TO START</div>
+            `;
+            state = 'READY';
+        }
+
+        function renderDay(el, scene) {
+            el.innerHTML = `
+                <div class="day-screen">
+                    <div class="day-label">DAY ${scene.day}</div>
+                    <div class="day-date">${scene.date}</div>
+                    <div class="day-subtitle">${scene.subtitle}</div>
+                </div>
+            `;
+            state = 'READY';
+        }
+
+        function renderDialogue(el, scene) {
+            el.innerHTML = `
+                <div class="scene-content">
+                    <div class="scene-label">${scene.label || ''}</div>
+                    <div class="characters">
+                        <img src="./jj_pixel.png" alt="JJ" class="char bob-1">
+                        <img src="./ann_pixel.png" alt="Ann" class="char bob-2">
+                    </div>
+                    <div class="dialogue-box">
+                        <div class="dialogue-text" id="dtext"></div>
+                        <div class="dialogue-arrow" id="darrow">▼</div>
+                    </div>
+                </div>
+            `;
+            typeText(scene.text);
+        }
+
+        function renderEnding(el, scene) {
+            el.innerHTML = `
+                <div class="ending-screen">
+                    <div class="characters ending-chars">
+                        <img src="./jj_pixel.png" alt="JJ" class="char bob-1">
+                        <img src="./ann_pixel.png" alt="Ann" class="char bob-2">
+                    </div>
+                    <div class="ending-text">${scene.text.replace(/\n/g, '<br>')}</div>
+                    <div class="ending-hearts">❤️ ❤️ ❤️</div>
+                </div>
+            `;
+            state = 'DONE';
+        }
+
+        // ─── Typing effect ───
+
+        function typeText(text) {
+            state = 'TYPING';
+            fullText = text;
+            const el = document.getElementById('dtext');
+            const arrow = document.getElementById('darrow');
+            if (!el) return;
+
+            el.innerHTML = '';
+            arrow.classList.remove('show');
+
+            let i = 0;
+            const chars = text.split('');
+
+            typeTimer = setInterval(() => {
+                if (i < chars.length) {
+                    const ch = chars[i];
+                    if (ch === '\n') {
+                        el.innerHTML += '<br>';
+                    } else {
+                        el.innerHTML += ch;
+                    }
+                    i++;
+                } else {
+                    clearInterval(typeTimer);
+                    typeTimer = null;
+                    state = 'READY';
+                    arrow.classList.add('show');
+                }
+            }, 50);
+        }
+
+        function showFullText() {
+            if (typeTimer) {
+                clearInterval(typeTimer);
+                typeTimer = null;
+            }
+            const el = document.getElementById('dtext');
+            const arrow = document.getElementById('darrow');
+            if (el) el.innerHTML = fullText.replace(/\n/g, '<br>');
+            if (arrow) arrow.classList.add('show');
+            state = 'READY';
+        }
+
+        // ─── Scene management ───
+
+        function renderScene(index) {
+            const scene = scenes[index];
+
+            container.classList.add('fade-out');
+
+            setTimeout(() => {
+                game.style.background = scene.bg;
+
+                switch (scene.type) {
+                    case 'title':
+                        renderTitle(container);
+                        break;
+                    case 'day':
+                        renderDay(container, scene);
+                        break;
+                    case 'scene':
+                        renderDialogue(container, scene);
+                        break;
+                    case 'ending':
+                        renderEnding(container, scene);
+                        break;
+                }
+
+                container.classList.remove('fade-out');
+                updateProgress(index);
+            }, 350);
+        }
+
+        function updateProgress(index) {
+            const pct = (index / (scenes.length - 1)) * 100;
+            progressFill.style.width = pct + '%';
+        }
+
+        function advance() {
+            if (state === 'TYPING') {
+                showFullText();
+                return;
+            }
+
+            if (state === 'DONE') return;
+
+            if (state === 'READY') {
+                currentScene++;
+                if (currentScene >= scenes.length) {
+                    state = 'DONE';
+                    return;
+                }
+                renderScene(currentScene);
+            }
+        }
+
+        // ─── Init ───
+
+        game.addEventListener('click', advance);
+
+        // Prevent double-tap zoom on mobile
+        game.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            advance();
+        });
+
+        createHearts();
+        renderScene(0);
+    </script>
+</body>
+</html>
