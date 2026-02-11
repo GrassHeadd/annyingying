@@ -66,7 +66,7 @@ function TitleScene() {
     <>
       <div className={s.titleChars}>
         <Image src="/jj_pixel.png" alt="JJ" width={90} height={90} className={s.bob1} />
-        <span className={s.titleHeart}>❤️</span>
+        <Image src="/pixel_heart.png" alt="heart" width={48} height={48} className={s.titleHeartImg} />
         <Image src="/ann_pixel.png" alt="Ann" width={90} height={90} className={s.bob2} />
       </div>
       <div className={s.titleMain}>{"VALENTINE'S"}<br />QUEST</div>
@@ -110,7 +110,11 @@ function EndingScene({ scene }) {
         <Image src="/ann_pixel.png" alt="Ann" width={100} height={100} className={`${s.char} ${s.bob2}`} />
       </div>
       <div className={s.endingText} dangerouslySetInnerHTML={{ __html: scene.text.replace(/\n/g, "<br/>") }} />
-      <div className={s.endingHearts}>❤️ ❤️ ❤️</div>
+      <div className={s.endingHearts}>
+        <Image src="/pixel_heart.png" alt="heart" width={32} height={32} className={s.endingHeartImg} />
+        <Image src="/pixel_heart.png" alt="heart" width={32} height={32} className={s.endingHeartImg} />
+        <Image src="/pixel_heart.png" alt="heart" width={32} height={32} className={s.endingHeartImg} />
+      </div>
     </div>
   );
 }

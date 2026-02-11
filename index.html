@@ -6,84 +6,76 @@
     <title>给 Ann</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Press+Start+2P&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600&family=Press+Start+2P&family=Noto+Sans+SC:wght@300;400;500&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./site.css">
     <link rel="stylesheet" href="./valentine_style.css">
 </head>
 <body>
 
     <!-- Navigation -->
-    <nav class="nav" id="nav">
-        <a href="#" class="nav-link active" data-tab="confession">Confession</a>
+    <nav class="nav dark" id="nav">
+        <a href="#" class="nav-link" data-tab="confession">Confession</a>
         <span class="nav-divider">|</span>
-        <a href="#" class="nav-link" data-tab="valentine">Valentine</a>
+        <a href="#" class="nav-link active" data-tab="valentine">Valentine</a>
     </nav>
 
-    <!-- Tab 1: Confession -->
-    <main id="tab-confession" class="tab-content active">
+    <!-- Tab 1: Confession (Original) -->
+    <main id="tab-confession" class="tab-content">
 
-        <!-- Intro -->
-        <section class="section section-intro">
-            <p class="intro-text fade-in">从那个网站到现在，好像很多事情都变了。</p>
-        </section>
-
-        <!-- The Moments -->
-        <section class="section section-moments">
-            <h2 class="section-title fade-in">那些时刻</h2>
-            <div class="moments-list">
-                <p class="moment fade-in">第一次见面，你笑着说你撞坏过停车杆</p>
-                <p class="moment fade-in">KTV唱到嗓子哑</p>
-                <p class="moment fade-in">你16小时shift还在跟我发消息</p>
-                <p class="moment fade-in">你把我送的东西挂在包上</p>
-                <p class="moment fade-in">你说"爱你"的那晚</p>
+        <!-- Stage 1: Envelope -->
+        <div id="confession-envelope" class="confession-stage confession-active">
+            <div class="c-container">
+                <h1 class="c-title">给你的一封信</h1>
+                <div class="c-envelope" id="c-envelope">
+                    <div class="c-envelope-flap"></div>
+                    <div class="c-envelope-body">
+                        <div class="c-heart-icon">&#10084;</div>
+                    </div>
+                </div>
+                <p class="c-hint">点击信封</p>
             </div>
-        </section>
+        </div>
 
-        <!-- About You -->
-        <section class="section section-about">
-            <h2 class="section-title fade-in">关于你</h2>
-            <div class="about-list">
-                <p class="about-item fade-in">你很直接，不喜欢就会说</p>
-                <p class="about-item fade-in">你很努力，再累也不抱怨</p>
-                <p class="about-item fade-in">你让我觉得可以做自己</p>
-                <p class="about-item fade-in">你叫我宝宝的时候</p>
+        <!-- Stage 2: Letter -->
+        <div id="confession-letter" class="confession-stage">
+            <div class="c-letter-container">
+                <div class="c-letter">
+                    <p>我希望有个如你一般的人，如山间清爽的风，如古城温暖的光。从清晨到傍晚，由山野到书房。</p>
+                    <p>和你在一起的时候，时间好像变得很轻，很快，很舒服，很自在，很想一直这样下去。</p>
+                    <p>认识你的时间很短，但我很认真。我不喜欢做承诺，因为未来太远，谁也看不清。但有些事情不需要想太多——我的心跳、我的直觉、我靠近你时的感觉，都在告诉我同一件事。</p>
+                    <p class="c-highlight">我喜欢你。</p>
+                    <p class="c-ending">只要最后是你，就好。</p>
+                </div>
+                <div class="c-hearts">
+                    <span class="c-float-heart">&#10084;</span>
+                    <span class="c-float-heart">&#10084;</span>
+                    <span class="c-float-heart">&#10084;</span>
+                </div>
+                <p class="c-question">做我女朋友好不好？</p>
+                <div class="c-buttons">
+                    <button class="c-btn c-yes-btn" id="c-yes-btn">好</button>
+                    <button class="c-btn c-no-btn" id="c-no-btn">不要</button>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <!-- What's Next -->
-        <section class="section section-next">
-            <h2 class="section-title fade-in">接下来</h2>
-            <div class="next-list">
-                <p class="next-item fade-in">Cancún 🌴</p>
-                <p class="next-item fade-in">更多一起吃的东西</p>
-                <p class="next-item fade-in">更多一起走的路</p>
-                <p class="next-item fade-in">不做承诺，但会一直认真</p>
+        <!-- Stage 3: Celebration -->
+        <div id="confession-yes" class="confession-stage">
+            <div class="c-confetti-container" id="c-confetti"></div>
+            <div class="c-hearts-container" id="c-floating-hearts"></div>
+            <div class="c-yes-container">
+                <h1 class="c-yes-header">太好啦！！</h1>
+                <p class="c-yes-subtext">我会好好珍惜你的 ❤️</p>
+                <div class="c-gif-container">
+                    <img src="./cat_flowers.jpeg" alt="Cute cat with flowers">
+                </div>
             </div>
-        </section>
-
-        <!-- Original Confession -->
-        <section class="section section-origin">
-            <h2 class="section-title fade-in">最初</h2>
-            <div class="origin-text">
-                <p class="fade-in">我希望有个如你一般的人，如山间清爽的风，如古城温暖的光。从清晨到傍晚，由山野到书房。</p>
-                <p class="fade-in">和你在一起的时候，时间好像变得很轻很慢。很舒服，很自在，很想一直这样下去。</p>
-                <p class="fade-in">认识你的时间很短，但我很认真。我不喜欢做承诺，因为未来太远，谁也看不清。但有些事情不需要想太多——我的心跳、我的直觉、我靠近你时的感觉，都在告诉我同一件事。</p>
-                <p class="fade-in highlight">我喜欢你。</p>
-                <p class="fade-in">只要最后是你，就好。</p>
-            </div>
-        </section>
-
-        <!-- Closing -->
-        <section class="section section-closing">
-            <p class="closing-line fade-in">谢谢你让我走进来。</p>
-            <p class="closing-greeting fade-in">情人节快乐，宝宝。</p>
-            <p class="closing-love fade-in">爱你 ❤️</p>
-        </section>
+        </div>
 
     </main>
 
     <!-- Tab 2: Valentine Game -->
-    <main id="tab-valentine" class="tab-content">
+    <main id="tab-valentine" class="tab-content active">
         <div id="game" class="game">
             <div class="hearts-bg" id="hearts-bg"></div>
             <div class="scene-container" id="scene-container"></div>
@@ -98,6 +90,9 @@
 
         const nav = document.getElementById('nav');
 
+        // Valentine is default, so hide overflow on load
+        document.body.style.overflow = 'hidden';
+
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -110,7 +105,6 @@
                 // Switch tab content
                 document.querySelectorAll('.tab-content').forEach(tab => {
                     tab.classList.remove('active');
-                    tab.classList.remove('entering');
                 });
 
                 const target = document.getElementById('tab-' + tabId);
@@ -123,11 +117,6 @@
                 } else {
                     nav.classList.remove('dark');
                     document.body.style.overflow = '';
-                    // Reset and re-trigger fade-in animations
-                    requestAnimationFrame(() => {
-                        target.classList.add('entering');
-                        resetFadeIns(target);
-                    });
                 }
 
                 // Scroll to top
@@ -135,42 +124,81 @@
             });
         });
 
-        // ─── Fade-in Observer ───
+        // ─── Confession Flow ───
 
-        function setupObserver() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                    }
-                });
-            }, {
-                threshold: 0.15,
-                rootMargin: '0px 0px -40px 0px'
-            });
+        let noMoveCount = 0;
+        const noResponses = ['不要', '真的不要', '别点我！', '求你了', '拜拜~'];
+        const noBtn = document.getElementById('c-no-btn');
+        const yesBtn = document.getElementById('c-yes-btn');
+        const envelope = document.getElementById('c-envelope');
 
-            document.querySelectorAll('.fade-in').forEach(el => {
-                observer.observe(el);
-            });
-
-            return observer;
+        function showStage(stageId) {
+            document.querySelectorAll('.confession-stage').forEach(s => s.classList.remove('confession-active'));
+            document.getElementById(stageId).classList.add('confession-active');
         }
 
-        function resetFadeIns(container) {
-            container.querySelectorAll('.fade-in').forEach(el => {
-                el.classList.remove('visible');
-            });
-            setTimeout(() => {
-                container.querySelectorAll('.fade-in').forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    if (rect.top < window.innerHeight && rect.bottom > 0) {
-                        el.classList.add('visible');
-                    }
-                });
-            }, 50);
+        envelope.addEventListener('click', () => {
+            envelope.classList.add('opened');
+            setTimeout(() => showStage('confession-letter'), 800);
+        });
+
+        yesBtn.addEventListener('click', () => {
+            showStage('confession-yes');
+            createConfetti();
+            createFloatingHearts();
+        });
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('click', handleNo);
+
+        function moveNoButton() {
+            noMoveCount++;
+            if (noMoveCount >= 5) {
+                noBtn.style.transition = 'opacity 0.3s ease';
+                noBtn.style.opacity = '0';
+                setTimeout(() => noBtn.remove(), 300);
+                return;
+            }
+            noBtn.textContent = noResponses[noMoveCount];
+            const confessionTab = document.getElementById('tab-confession');
+            const maxX = confessionTab.offsetWidth - noBtn.offsetWidth - 20;
+            const maxY = confessionTab.offsetHeight - noBtn.offsetHeight - 20;
+            noBtn.style.position = 'fixed';
+            noBtn.style.left = Math.random() * maxX + 'px';
+            noBtn.style.top = Math.random() * maxY + 'px';
         }
 
-        setupObserver();
+        function handleNo() {
+            moveNoButton();
+        }
+
+        // Celebration effects
+        function createConfetti() {
+            const container = document.getElementById('c-confetti');
+            const colors = ['#ff6b6b', '#ffd93d', '#6bcb77', '#4d96ff', '#ff8cc8', '#a66cff'];
+            for (let i = 0; i < 100; i++) {
+                const c = document.createElement('div');
+                c.className = 'c-confetti';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                c.style.animationDelay = Math.random() * 3 + 's';
+                c.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(c);
+            }
+        }
+
+        function createFloatingHearts() {
+            const container = document.getElementById('c-floating-hearts');
+            for (let i = 0; i < 20; i++) {
+                const h = document.createElement('div');
+                h.className = 'c-floating-heart-anim';
+                h.innerHTML = '❤️';
+                h.style.left = Math.random() * 100 + '%';
+                h.style.animationDelay = Math.random() * 5 + 's';
+                h.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                container.appendChild(h);
+            }
+        }
 
         // ─── Valentine Game ───
 
@@ -309,7 +337,7 @@
             el.innerHTML = `
                 <div class="title-chars">
                     <img src="./jj_pixel.png" alt="JJ" class="bob-1">
-                    <span class="title-heart">❤️</span>
+                    <img src="./pixel_heart.png" alt="heart" class="title-heart-img">
                     <img src="./ann_pixel.png" alt="Ann" class="bob-2">
                 </div>
                 <div class="title-main">VALENTINE'S<br>QUEST</div>
@@ -355,7 +383,11 @@
                         <img src="./ann_pixel.png" alt="Ann" class="char bob-2">
                     </div>
                     <div class="ending-text">${scene.text.replace(/\n/g, '<br>')}</div>
-                    <div class="ending-hearts">❤️ ❤️ ❤️</div>
+                    <div class="ending-hearts">
+                        <img src="./pixel_heart.png" alt="heart" class="ending-heart-img">
+                        <img src="./pixel_heart.png" alt="heart" class="ending-heart-img">
+                        <img src="./pixel_heart.png" alt="heart" class="ending-heart-img">
+                    </div>
                 </div>
             `;
             gameState = 'DONE';

@@ -108,6 +108,12 @@
   animation: pulse 1.5s ease-in-out infinite;
 }
 
+.titleHeartImg {
+  background: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
 @keyframes pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.25); }
