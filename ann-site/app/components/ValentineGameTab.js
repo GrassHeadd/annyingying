@@ -7,7 +7,7 @@ import s from "./valentineGame.module.css";
 const scenes = [
   { type: "title", bg: "#13101f" },
   { type: "day", day: "1", date: "2月14日", subtitle: "Valentine's Day", bg: "#1a1430" },
-  { type: "scene", label: "~ 出发 ~", text: "来吧宝宝\n冒险要开始了~", bg: "#1a1430" },
+  { type: "scene", label: "~ 出发 ~", text: "来吧宝宝\n我们出发了~", bg: "#1a1430" },
   { type: "scene", label: "📍 Court Square Hotel · 4:00 PM", text: "Court Square Hotel\n先把东西放下~", bg: "#1a1430", bgImage: "/bg_court1.avif" },
   { type: "scene", label: "📍 NARO · 5:30 PM", text: "情人节晚餐~\n610 5th Ave", bg: "#1c1432", bgImage: "/bg_naro.avif" },
   { type: "scene", label: "🌙 Evening", text: "吃饱了～\n回酒店看Singles Inferno 🔥", bg: "#0f0d1a", bgImage: "/bg_court1.avif" },
@@ -19,7 +19,7 @@ const scenes = [
   { type: "scene", label: "🍽️ 晚餐 · 6:30 PM", text: "待定...\n你想吃什么？", bg: "#181430" },
   { type: "scene", label: "🌙 Evening", text: "然后继续...\nNetflix？😏💤", bg: "#0f0d1a", bgImage: "/bg_ac.avif" },
   { type: "day", day: "3", date: "2月16日", subtitle: "Until Next Time", bg: "#161222" },
-  { type: "scene", label: "☀️ 11:00 AM", text: "退房～\n冒险结束了...", bg: "#161222", bgImage: "/bg_ac.avif" },
+  { type: "scene", label: "☀️ 11:00 AM", text: "退房～\n旅程结束了...", bg: "#161222", bgImage: "/bg_ac.avif" },
   { type: "ending", text: "但跟你的故事\n才刚刚开始", bg: "#161222" },
 ];
 
@@ -46,7 +46,7 @@ const schedule = [
   {
     day: "3", date: "2月16日", subtitle: "Until Next Time",
     items: [
-      { time: "11:00 AM", label: "", desc: "退房 · 冒险结束" },
+      { time: "11:00 AM", label: "", desc: "退房 · 旅程结束" },
     ],
   },
 ];
@@ -209,6 +209,9 @@ function ScheduleSheet() {
   );
 }
 
+// ─── Singleton BGM ───
+let bgmAudio = null;
+
 // ─── Main ───
 
 export default function ValentineGameTab() {
@@ -222,7 +225,6 @@ export default function ValentineGameTab() {
   const stateRef = useRef("READY");
   const timerRef = useRef(null);
   const fullTextRef = useRef("");
-  const bgmRef = useRef(null);
 
   const scene = scenes[currentScene];
   const progress = (currentScene / (scenes.length - 1)) * 100;
@@ -314,14 +316,13 @@ export default function ValentineGameTab() {
       if (currentScene === 0) {
         setStarting(true);
         playStartSound();
-        // Start background music
-        if (!bgmRef.current) {
-          const audio = new Audio("/bgm.mp3");
-          audio.loop = true;
-          audio.volume = 0.15;
-          bgmRef.current = audio;
+        // Start background music (singleton)
+        if (!bgmAudio) {
+          bgmAudio = new Audio("/bgm.mp3");
+          bgmAudio.loop = true;
+          bgmAudio.volume = 0.15;
         }
-        bgmRef.current.play().catch(() => {});
+        bgmAudio.play().catch(() => {});
         stateRef.current = "TRANSITIONING";
         setTimeout(() => {
           setFading(true);
@@ -355,13 +356,6 @@ export default function ValentineGameTab() {
     advance();
   }
 
-  function handleTouch(e) {
-    if (e.target.closest("button")) return;
-    e.preventDefault();
-    e.stopPropagation();
-    advance();
-  }
-
   function toggleSheet(e) {
     e.stopPropagation();
     setShowSheet((v) => !v);
@@ -372,7 +366,6 @@ export default function ValentineGameTab() {
       className={s.game}
       style={{ background: showSheet ? "#13101f" : scene.bg }}
       onClick={showSheet ? undefined : handleClick}
-      onTouchEnd={showSheet ? undefined : handleTouch}
     >
       {!showSheet && scene.bgImage && (
         <div
@@ -383,7 +376,7 @@ export default function ValentineGameTab() {
 
       <FloatingHearts />
 
-      <button className={s.toggleBtn} onClick={toggleSheet} onTouchEnd={(e) => { e.preventDefault(); toggleSheet(e); }}>
+      <button className={s.toggleBtn} onClick={toggleSheet}>
         {showSheet ? "GAME" : "SCHEDULE"}
       </button>
 
@@ -401,7 +394,7 @@ export default function ValentineGameTab() {
           </div>
 
           {currentScene > 0 && (
-            <button className={`${s.navBtn} ${s.navLeft}`} onClick={goBack} onTouchEnd={(e) => { e.preventDefault(); e.stopPropagation(); goBack(e); }}>
+            <button className={`${s.navBtn} ${s.navLeft}`} onClick={goBack}>
               ‹
             </button>
           )}
