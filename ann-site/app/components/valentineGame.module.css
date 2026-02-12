@@ -101,6 +101,13 @@
 
 /* ─── Title Screen ─── */
 
+.titleScreen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .titleChars {
   display: flex;
   align-items: center;
@@ -224,6 +231,18 @@
   }
 }
 
+/* ─── Title Start Animation ─── */
+
+.titleStarting {
+  animation: titleFlash 0.5s ease forwards;
+}
+
+@keyframes titleFlash {
+  0% { transform: scale(1); filter: brightness(1); }
+  50% { transform: scale(1.05); filter: brightness(1.8); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
 /* ─── Dialogue Scene ─── */
 
 .sceneContent {
@@ -236,15 +255,33 @@
 }
 
 .sceneLabel {
-  font-family: var(--font-press-start), cursive;
+  font-family: var(--font-noto-sans-sc), sans-serif;
   color: #c4b5fd;
-  font-size: 9px;
+  font-size: 16px;
+  font-weight: 400;
   letter-spacing: 1.5px;
   margin-bottom: 24px;
   text-align: center;
   line-height: 1.8;
-  min-height: 18px;
+  min-height: 20px;
   text-shadow: 0 0 10px rgba(196, 181, 253, 0.25);
+}
+
+.portraitRow {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 22px;
+}
+
+.portrait {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(196, 181, 253, 0.3);
+  box-shadow:
+    0 0 20px rgba(196, 181, 253, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .characters {
@@ -256,8 +293,8 @@
 }
 
 .char {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
   border-radius: 14px;
   box-shadow:
     0 0 20px rgba(196, 181, 253, 0.12),
@@ -286,9 +323,9 @@
   background: rgba(10, 8, 20, 0.85);
   border: 1.5px solid rgba(196, 181, 253, 0.3);
   border-radius: 12px;
-  padding: 22px 24px 28px;
-  width: 100%;
-  min-height: 88px;
+  padding: 20px 22px 26px;
+  flex: 1;
+  min-height: 80px;
   position: relative;
   box-shadow:
     0 0 0 1px rgba(196, 181, 253, 0.08),
@@ -606,20 +643,30 @@
   }
 
   .sceneLabel {
-    font-size: 8px;
+    font-size: 14px;
     letter-spacing: 1px;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
+  }
+
+  .portraitRow {
+    gap: 18px;
+    margin-bottom: 16px;
+  }
+
+  .portrait {
+    width: 64px;
+    height: 64px;
   }
 
   .dialogueBox {
-    padding: 18px 20px 24px;
-    min-height: 72px;
+    padding: 16px 18px 22px;
+    min-height: 68px;
     border-radius: 10px;
   }
 
   .dialogueText {
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 15px;
+    line-height: 1.7;
   }
 
   .dayLabel {
