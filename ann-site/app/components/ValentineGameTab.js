@@ -125,15 +125,16 @@ const schedule = [
     subtitle: "The Adventure Continues",
     items: [
       { time: "11:00 AM", label: "", desc: "退房去新酒店放东西" },
-      { time: "12:00 PM", label: "", desc: "午饭 · 新疆菜" },
+      { time: "12:00 PM", label: "", desc: "午饭 · 11111111111新疆菜" },
       { time: "2:00 PM", label: "SIX", desc: "Broadway 音乐剧 · Mezz Row J" },
+      { time: "4:00 PM", label: "SIX", desc: "SOHO shopping" },
       {
-        time: "4:00 PM",
+        time: "6:00 PM",
         label: "AC Marriott Hotel",
         desc: "Check in · 放东西",
       },
       { time: "6:30 PM", label: "", desc: "晚餐 · 青花椒" },
-      { time: "Evening", label: "", desc: "Netflix？😏💤" },
+      { time: "Evening", label: "", desc: "Alan Walker tbc" },
     ],
   },
   {
